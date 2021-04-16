@@ -1,21 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { Router } from "express";
-import { v4 as uuidV4 } from "uuid";
+
+import { CategoriesRepository } from "../modules/cars/repositories/CategoriesRepository";
+import { createCategoryController } from "../modules/cars/useCases/createCategory";
+import { listCategoriesController } from "../modules/cars/useCases/listCategories";
 
 const categoriesRoutes = Router();
 
-const categories = [];
+const categoriesRepository = new CategoriesRepository();
 
 categoriesRoutes.post("/", (request, response) => {
-    const { name, description } = request.body;
+    return createCategoryController.handle(request, response);
+});
 
-    categories.push({
-        id: uuidV4(),
-        name,
-        description,
-    });
-
-    return response.status(201).send();
+categoriesRoutes.get("/", (request, response) => {
+    return listCategoriesController.handle(request, response);
 });
 
 export { categoriesRoutes };
