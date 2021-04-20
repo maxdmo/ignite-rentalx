@@ -1,47 +1,49 @@
 import { Category } from "../../models/Category";
 import {
-  ICategoriesRespository,
-  ICreateCategoryDTO,
+    ICategoriesRespository,
+    ICreateCategoryDTO,
 } from "../ICategoriesRepository";
 
 class CategoriesRepository implements ICategoriesRespository {
-  private categories: Category[];
+    private categories: Category[];
 
-  private static INSTANCE: CategoriesRepository;
+    private static INSTANCE: CategoriesRepository;
 
-  private constructor() {
-    this.categories = [];
-  }
-
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
+    private constructor() {
+        this.categories = [];
     }
 
-    return CategoriesRepository.INSTANCE;
-  }
+    public static getInstance(): CategoriesRepository {
+        if (!CategoriesRepository.INSTANCE) {
+            CategoriesRepository.INSTANCE = new CategoriesRepository();
+        }
 
-  create({ description, name }: ICreateCategoryDTO): void {
-    const category = new Category();
+        return CategoriesRepository.INSTANCE;
+    }
 
-    Object.assign(category, {
-      name,
-      description,
-      created_at: new Date(),
-    });
+    create({ description, name }: ICreateCategoryDTO): void {
+        const category = new Category();
 
-    this.categories.push(category);
-  }
+        Object.assign(category, {
+            name,
+            description,
+            created_at: new Date(),
+        });
 
-  list(): Category[] {
-    return this.categories;
-  }
+        this.categories.push(category);
+    }
 
-  findByName(name: string): Category {
-    const category = this.categories.find((category) => category.name === name);
+    list(): Category[] {
+        return this.categories;
+    }
 
-    return category;
-  }
+    findByName(name: string): Category {
+        const category = this.categories.find(
+            (category) => category.name === name
+        );
+
+        return category;
+    }
 }
 
 export { CategoriesRepository };
