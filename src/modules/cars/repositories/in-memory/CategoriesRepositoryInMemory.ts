@@ -1,12 +1,17 @@
-import { Category } from "../../entities/Category";
-import { ICategoriesRespository, ICreateCategoryDTO } from "../ICategoriesRepository";
+import { Category } from "@modules/cars/infra/typeorm/entities/Category";
 
-class CategoriesRepositoryInMemory implements ICategoriesRespository{
+import {
+    ICategoriesRespository,
+    ICreateCategoryDTO,
+} from "../ICategoriesRepository";
+
+class CategoriesRepositoryInMemory implements ICategoriesRespository {
     categories: Category[] = [];
 
-
     async findByName(name: string): Promise<Category> {
-        const category = await this.categories.find(category => category.name === name);
+        const category = await this.categories.find(
+            (category) => category.name === name
+        );
 
         return category;
     }
@@ -17,16 +22,15 @@ class CategoriesRepositoryInMemory implements ICategoriesRespository{
     }
 
     async create({ name, description }: ICreateCategoryDTO): Promise<void> {
-        const category  = new Category();
+        const category = new Category();
 
         Object.assign(category, {
             name,
-            description
+            description,
         });
 
         this.categories.push(category);
     }
-
 }
 
-export {CategoriesRepositoryInMemory}
+export { CategoriesRepositoryInMemory };
