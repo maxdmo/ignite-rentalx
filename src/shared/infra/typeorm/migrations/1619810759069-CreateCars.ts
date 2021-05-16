@@ -24,7 +24,7 @@ export class CreateCars1619810759069 implements MigrationInterface {
                         type: "numeric",
                     },
                     {
-                        name: "avaliable",
+                        name: "available",
                         type: "boolean",
                         default: true,
                     },
@@ -51,9 +51,21 @@ export class CreateCars1619810759069 implements MigrationInterface {
                         default: "now()",
                     },
                 ],
+                foreignKeys: [
+                    {
+                        name: "FKCategoryCar",
+                        referencedTableName: "categories",
+                        referencedColumnNames: ["id"],
+                        columnNames: ["category_id"],
+                        onDelete: "SET NULL",
+                        onUpdate: "SET NULL",
+                    },
+                ],
             })
         );
     }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {}
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("cars");
+    }
 }

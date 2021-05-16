@@ -1,4 +1,4 @@
-import { CategoriesRepositoryInMemory } from "@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory";
+import { CategoriesRepositoryInMemory } from "@modules/cars/infra/typeorm/repositories/in-memory/CategoriesRepositoryInMemory";
 import { AppError } from "@shared/errors/AppErrors";
 
 import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
