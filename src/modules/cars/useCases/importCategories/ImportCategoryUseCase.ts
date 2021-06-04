@@ -2,7 +2,7 @@ import csvParse from "csv-parse";
 import fs from "fs";
 import { inject, injectable } from "tsyringe";
 
-import { ICategoriesRespository } from "@modules/cars/interfaces/ICategoriesRepository";
+import { ICategoriesRepository } from "@modules/cars/interfaces/ICategoriesRepository";
 
 interface IImportCategory {
     name: string;
@@ -13,7 +13,7 @@ interface IImportCategory {
 class ImportCategoryUseCase {
     constructor(
         @inject("CategoriesRepository")
-        private categoriesRepository: ICategoriesRespository
+        private categoriesRepository: ICategoriesRepository
     ) {}
 
     loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {

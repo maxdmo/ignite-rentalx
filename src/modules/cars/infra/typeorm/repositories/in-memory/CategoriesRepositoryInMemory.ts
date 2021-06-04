@@ -1,10 +1,10 @@
 import { Category } from "@modules/cars/infra/typeorm/entities/Category";
 import {
-    ICategoriesRespository,
+    ICategoriesRepository,
     ICreateCategoryDTO,
 } from "@modules/cars/interfaces/ICategoriesRepository";
 
-class CategoriesRepositoryInMemory implements ICategoriesRespository {
+class CategoriesRepositoryInMemory implements ICategoriesRepository {
     categories: Category[] = [];
 
     async findByName(name: string): Promise<Category> {
